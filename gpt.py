@@ -26,15 +26,14 @@ import g4f
 
 class GPTManager:
     context = ""
-    globalContext = ""
 
     def __init__(self):
-        self.globalContext = "C этого момента пиши только кириллицей."
+        self.сontext = "C этого момента пиши только кириллицей."
 
     def send(self, data):
         response = g4f.ChatCompletion.create(
             model = "gpt-3.5-turbo",
-            messages = [{"role": "user", "content": (self.globalContext + " Контекст: " + self.context + "\nОтветь на это в контексте: " + data)}],
+            messages = [{"role": "user", "content": ("Контекст: " + self.context + "\nОтветь на это в контексте: " + data)}],
             stream = False
         )
         output = ""

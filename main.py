@@ -6,22 +6,23 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 from gpt import GPTManager
 
-class MyLayout(BoxLayout):
-    data_label = StringProperty("Чем я могу помочь?\n\n")
+class APPGUI(BoxLayout):
+    data_label = StringProperty("[b][color=84c3be]Цифра:[/color][/b] Чем я могу помочь?\n\n")
 
     def callback(self):
-        self.set_data_label("[i][color=60cc52]Вы:[/color][/i] " + self.ids.Inp.text + "\n")
-        self.set_data_label("[i][color=84c3be]Цифра:[/color][/i] " + GPTManager().send(self.ids.Inp.text) + "\n")
-        self.ids.Inp.text = ""
+        if self.ids.Inp.text != "":
+            self.set_data_label("[b][color=60cc52]Вы:[/color][/b] " + self.ids.Inp.text + "\n\n")
+            self.set_data_label("[b][color=84c3be]Цифра:[/color][/b] " + GPTManager().send(self.ids.Inp.text) + "\n\n")
+            self.ids.Inp.text = ""
 
     def set_data_label(self, data):
         self.data_label += str(data)
 
-class Mapp(App):
+class SafeDigit(App):
     def process(self):
         text = self.root.ids.Inp.text
 
     def build(self):
-        return MyLayout()
+        return APPGUI()
 
-Mapp().run()
+SafeDigit().run()

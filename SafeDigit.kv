@@ -1,0 +1,58 @@
+<RoundedButton@Button>
+    font_size: "20sp"
+    background_color: (0, 0, 0, 0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (48/255, 84/255, 150/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [0, 0, 50, 50]
+        BoxShadow:
+            pos: self.pos
+            size: self.size
+            spread_radius: -20, -20
+            border_radius: 10, 0, 0, 10
+            blur_radius: 80 if self.state == "normal" else 50
+
+<APPGUI>:
+    canvas.before:
+        Color:
+            rgba: 111, 115, 120, 0.1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
+    padding: 30
+    orientation: 'vertical'
+
+    ScrollView:
+        Label:
+            font_size: "20sp"
+            size_hint_y: None
+            height: self.texture_size[1]
+            text_size: self.width, None
+            text: root.data_label
+            color: 1,1,1,0.8
+            markup: True
+
+    TextInput:
+        id: Inp
+        multiline: False
+        padding_y: (5, 5)
+        size_hint: (1, 0.2)
+        focus: True
+        font_size: "20sp"
+        do_wrap: True
+        foreground_color: (1, 1, 1, 1)
+        background_color: (1, 1, 1, 0.2)
+        multiline: True
+
+    RoundedButton:
+        font_size: "20sp"
+        text: "Отправить"
+        bold: True
+        size_hint: (1, 0.2)
+        on_press: root.callback()
+        border_radius: 10, 10, 10, 10
